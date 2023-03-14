@@ -1,13 +1,15 @@
-# 🚀vue@3.2 + vite@4 + element-plus
+# 🚀Vue@3.2 + Vue Router + Typescript + Element Plus
 
 ![Node.js@16.16.0](https://img.shields.io/badge/node-16.16.0-green)
+![pnpm@7.26.0](https://img.shields.io/badge/pnpm-7.26.0-green)
 
 - vue@3.2
 - vue-router
+- typescript
 - vite
+- element-plus
 - pinia
 - axios
-- sass
 
 ```json
 "dependencies": {
