@@ -75,12 +75,12 @@ class Request {
     return this.instance.request(config)
   }
 
-  get<T = any>(url: string, config?: RawAxiosRequestConfig) {
-    return this.request<T>({ url, ...config, method: 'GET' })
+  get<T = any>(url: string, config?: RawAxiosRequestConfig): Promise<T> {
+    return this.instance.get(url, config)
   }
 
-  post<T = any>(url: string, data?: any, config?: RawAxiosRequestConfig) {
-    return this.request<T>({ url, data, ...config, method: 'POST' })
+  post<T = any>(url: string, data?: any, config?: RawAxiosRequestConfig): Promise<T> {
+    return this.instance.post(url, data, config)
   }
 }
 
