@@ -6,6 +6,7 @@ import type {
   InternalAxiosRequestConfig,
   RawAxiosRequestConfig,
 } from 'axios'
+import { ElMessage } from 'element-plus'
 import router from '@/router'
 import useSessionStore from '@/stores/session'
 
@@ -38,56 +39,48 @@ class Request {
     )
 
     this.instance.interceptors.response.use(
-      (response: AxiosResponse) => {
-        return response
+      <T>(response: AxiosResponse) => {
+        const SUCCESS_CODE = 1001
+
+        if (response.status !== 200) return Promise.reject(response)
+
+        const { code, data, message } = response.data as ApiResponse<T>
+
+        if (code !== SUCCESS_CODE) {
+          if (code === 401) {
+            sessionStore.$reset()
+            router.push({
+              name: 'Login',
+              query: {
+                redirect: router.currentRoute.value.path,
+              },
+            })
+          }
+
+          ElMessage.error(message)
+
+          return Promise.reject(data)
+        }
+
+        return data
       },
       (err) => {
-        // return err; // 直接return err会走到then方法
+        ElMessage.error(err.message)
         return Promise.reject(err)
       }
     )
   }
 
   request<T = any>(config: RawAxiosRequestConfig): Promise<T> {
-    return new Promise((resolve, reject) => {
-      this.instance
-        .request<any, AxiosResponse<ApiResponse<T>>>(config)
-        .then((res) => {
-          const result = res.data
-          const { code, data } = result
-
-          switch (code) {
-            case 401:
-              sessionStore.$reset()
-              router.push({
-                name: 'Login',
-                query: {
-                  redirect: router.currentRoute.value.fullPath,
-                },
-              })
-              break
-            case 200:
-              resolve(data)
-              break
-            default:
-              // message.error(data.message); // 统一错误提示：业务接口错误
-              reject(result)
-              break
-          }
-        })
-        .catch((err) => {
-          // message.error(err.message); // 统一错误提示：axios 错误
-          reject(err)
-        })
-    })
+    return this.instance.request(config)
   }
 
   get<T = any>(url: string, config?: RawAxiosRequestConfig) {
-    return this.request<T>({ method: 'GET', url, ...config })
+    return this.request<T>({ url, ...config, method: 'GET' })
   }
 
   post<T = any>(url: string, data?: any, config?: RawAxiosRequestConfig) {
-    return this.request<T>({ method: 'POST', url, data, ...config })
+    return this.request<T>({ url, data, ...config, method: 'POST' })
   }
 }
 
