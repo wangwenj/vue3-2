@@ -16,15 +16,6 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/Login/index.vue'),
   },
   {
-    path: '/sankey',
-    name: 'Sankey',
-    meta: {
-      title: 'Sankey',
-      requiresAuth: false,
-    },
-    component: () => import('@/views/Sankey/index.vue'),
-  },
-  {
     path: '/',
     component: () => import('@/components/Layout.vue'),
     redirect: '/home',

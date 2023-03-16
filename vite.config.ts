@@ -8,7 +8,6 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // base: "/vue3-vite-admin/", // 打包的时候放开。我这里是部署Github Pages静态站点写了我的仓库名，这样 https://iamzwq.github.io/vue3-vite-admin/ 就能访问了
   plugins: [
     vue(),
     AutoImport({
