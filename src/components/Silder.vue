@@ -17,21 +17,27 @@
   const list: List[] = [
     {
       id: 'home',
-      title: 'HOME',
+      title: '首页',
       path: '/home',
       icon: 'home',
     },
     {
       id: 'about',
-      title: 'ABOUT',
+      title: '关于',
       path: '/about',
       icon: 'about',
     },
     {
       id: 'user',
-      title: 'USER',
+      title: '用户',
       path: '/user',
       icon: 'user',
+    },
+    {
+      id: 'weather',
+      title: '天气',
+      path: '/weather',
+      icon: 'weather',
     },
   ]
 

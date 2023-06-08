@@ -45,6 +45,14 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/User/index.vue'),
       },
+      {
+        path: '/weather',
+        meta: {
+          title: 'Weather',
+          requiresAuth: true,
+        },
+        component: () => import('@/views/Weather/index.vue'),
+      },
     ],
   },
   {

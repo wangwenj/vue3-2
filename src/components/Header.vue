@@ -13,8 +13,11 @@
 
 <template>
   <header class="header">
-    <div class="logo"></div>
-    <el-menu
+    <div class="logo">
+      <img src="/src/assets/images/logo.png">
+      唐玉森：202250915129
+    </div>
+    <!-- <el-menu
       :default-active="activeIndex"
       class="nav"
       mode="horizontal"
@@ -23,12 +26,12 @@
       <el-menu-item index="1">Menu Item 1</el-menu-item>
       <el-menu-item index="2">Menu Item 2</el-menu-item>
       <el-menu-item index="3">Menu Item 3</el-menu-item>
-    </el-menu>
+    </el-menu> -->
     <div class="operation" @click="router.push('/login')">
       <el-avatar
         src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
       />
-      signOut
+      退出登录
     </div>
   </header>
 </template>
@@ -37,14 +40,15 @@
   .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 60px;
     background-color: white;
 
     .logo {
-      background: url(@/assets/images/logo.png) no-repeat center / 100% 100%;
-      width: 168px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       margin: 0 16px;
+      display: flex;
     }
 
     .nav {
