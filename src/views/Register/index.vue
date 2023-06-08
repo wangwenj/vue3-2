@@ -4,7 +4,6 @@
   import type { FormInstance, FormRules } from 'element-plus'
   import userApi from '@/api/user'
   import useSessionStore from '@/stores/session'
-import { pa } from 'element-plus/es/locale'
 
   const router = useRouter()
   const route = useRoute()
@@ -14,8 +13,8 @@ import { pa } from 'element-plus/es/locale'
   const ruleFormRef = ref<FormInstance>()
 
   const loginForm = reactive({
-    username: 'tangyusen',
-    password: '202250915129',
+    username: '',
+    password: '',
   })
 
   const validateUsername = (rule: any, value: any, callback: any) => {
@@ -53,16 +52,13 @@ import { pa } from 'element-plus/es/locale'
     if (!formEl) return
     formEl.validate((valid) => {
       if (valid) {
-        userApi.login(loginForm).then(handleLoginSuccess).finally(handleLoginSuccess)
+      router.push('login')
+        
       } else {
-        console.log('error submit!')
+        alert('请输入用户名和密码')
         return false
       }
     })
-  }
-
-  const goRouter = (path:string)=>{
-    router.push(path)
   }
 </script>
 
@@ -82,10 +78,9 @@ import { pa } from 'element-plus/es/locale'
         <el-input v-model="loginForm.password" type="password" autocomplete="off" />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm(ruleFormRef)">登录</el-button>
+        <el-button type="primary" @click="submitForm(ruleFormRef)">注册</el-button>
       </el-form-item>
     </el-form>
-    <el-link :underline="false" class="register" @click="goRouter('/register')">注册</el-link>
   </section>
 </template>
 
@@ -96,9 +91,5 @@ import { pa } from 'element-plus/es/locale'
     width: 400px;
     border: 1px solid #ccc;
     box-shadow: 1px 5px 5px 5px #ccc;
-  }
-  .register{
-    display: flex;
-    justify-content: flex-end;
   }
 </style>
